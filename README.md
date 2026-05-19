@@ -1,4 +1,4 @@
-# MediVision AI — Django Medical Diagnostic Platform
+# MediVision AI — Django Medical Diagnostic Platform (live on - https://medivision-7gaa.onrender.com/)
 
 13 CNN scanners embedded into a full Django web application.
 
@@ -12,7 +12,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Visit: http://127.0.0.1:8000
+THEN RUN THIS URL IN YOUR LOCAL MACHINE : http://127.0.0.1:8000
 
 ---
 

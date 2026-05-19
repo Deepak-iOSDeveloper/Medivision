@@ -1,0 +1,17 @@
+# Dataset images
+Medical_Dataset/
+medical_Dataset/
+ml_models/
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Jupyter
+.ipynb_checkpoints/

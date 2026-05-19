@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: medivision
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py migrate && gunicorn medivision.wsgi --timeout 120
+    envVars:
+      - key: HF_TOKEN
+        value: your_token_here
+      - key: HF_REPO
+        value: DeepakLPU/medivision-models
+      - key: SECRET_KEY
+        value: your_secret_key
+      - key: DEBUG
+        value: false
+    disk:
+      name: ml-models
+      mountPath: /opt/render/project/src/ml_models
+      sizeGB: 5

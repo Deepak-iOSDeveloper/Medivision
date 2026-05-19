@@ -1,0 +1,102 @@
+{% extends "scanner/base.html" %}
+{% block title %}Dashboard — MediVision AI{% endblock %}
+{% block topbar_title %}Dashboard{% endblock %}
+{% block topbar_sub %}Overview of all 13 CNN scanners and recent activity{% endblock %}
+
+{% block extra_head %}
+<style>
+.hero { background: linear-gradient(135deg, #0e1529 0%, #0f2640 60%, #0d3320 100%); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; margin-bottom: 28px; position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%); }
+.hero-title { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+.hero-sub   { font-size: 14px; color: var(--muted); max-width: 520px; line-height: 1.6; }
+.stat-card  { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+.stat-num   { font-size: 32px; font-weight: 700; font-family: var(--mono); }
+.stat-lbl   { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.section-title { font-size: 15px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.scanners-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-title">🏥 MediVision AI Diagnostic Platform</div>
+  <div class="hero-sub">AI-powered medical image analysis using 13 custom Convolutional Neural Networks trained on real clinical datasets. Upload scan images and receive instant diagnostic predictions.</div>
+  <div class="disclaimer" style="margin-top:18px; max-width:580px">
+    ⚠️ <strong>Medical Disclaimer:</strong> This tool is for educational and assistive purposes only. All results must be reviewed by a qualified medical professional. Do not use for self-diagnosis.
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="grid-4 mb-24">
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--accent2)">{{ stats.total }}</div>
+    <div class="stat-lbl">Total Scans</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--safe)">{{ stats.safe }}</div>
+    <div class="stat-lbl">Safe Results</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:#f87171">{{ stats.high }}</div>
+    <div class="stat-lbl">High Risk</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:#fca5a5">{{ stats.critical }}</div>
+    <div class="stat-lbl">Critical</div>
+  </div>
+</div>
+
+<!-- 13 Scanners -->
+<div class="section-title">
+  <span>🔬</span> 13 Medical Scanners
+  <span style="font-size:12px;color:var(--muted);font-weight:400">Click any scanner to begin analysis</span>
+</div>
+<div class="scanners-grid mb-24">
+  {% for s in scanners %}
+  <a href="{% url 'scan_page' s.key %}">
+    <div class="scanner-card">
+      <div class="scanner-icon">{{ s.icon }}</div>
+      <div class="scanner-title">{{ s.title }}</div>
+      <div class="scanner-organ">{{ s.organ }}</div>
+      <div class="scanner-desc">{{ s.desc }}</div>
+      <div class="scanner-arrow">→</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<!-- Recent scans -->
+{% if recent %}
+<div class="section-title"><span>📋</span> Recent Scans</div>
+<div class="card">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Scanner</th>
+          <th>Result</th>
+          <th>Confidence</th>
+          <th>Severity</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in recent %}
+        <tr>
+          <td><span style="font-size:16px">{{ s.model_key|default:"🔬" }}</span> {{ s.scan_title|truncatechars:30 }}</td>
+          <td><strong>{{ s.predicted_class }}</strong></td>
+          <td><span style="font-family:var(--mono)">{{ s.confidence }}%</span></td>
+          <td><span class="severity-pill sev-{{ s.severity }}">{{ s.severity|title }}</span></td>
+          <td style="color:var(--muted)">{{ s.created_at|date:"M d, H:i" }}</td>
+          <td><a href="{% url 'result_page' s.id %}" class="btn btn-ghost" style="padding:5px 12px;font-size:12px">View</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,3 +1,14 @@
+---
+title: Medivision
+emoji: 🏥
+colorFrom: blue
+colorTo: teal
+sdk: docker
+pinned: false
+---
+
+# MediVision AI — Medical Image Diagnostic Platform
+13 CNN models for medical image analysis.
 # MediVision AI — Django Medical Diagnostic Platform (live on - https://medivision-7gaa.onrender.com/)
 
 13 CNN scanners embedded into a full Django web application.

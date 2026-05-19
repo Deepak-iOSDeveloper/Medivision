@@ -13,4 +13,4 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 7860
 
-CMD ["sh", "-c", "python manage.py migrate && gunicorn medivision.wsgi --bind 0.0.0.0:7860 --timeout 120 --workers 1"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn medivision.wsgi --bind 0.0.0.0:7860 --timeout 120 --workers 1 --forwarded-allow-ips='*'"]

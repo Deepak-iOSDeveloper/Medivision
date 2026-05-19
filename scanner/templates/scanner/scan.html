@@ -201,7 +201,7 @@ async function runAnalysis() {
   form.append('image', selectedFile);
 
   try {
-    const res  = await fetch(RUN_URL, { method: 'POST', headers: { 'X-CSRFToken': CSRF }, body: form });
+    const res  = await fetch(RUN_URL, { method: 'POST', body: form });
     const data = await res.json();
 
     if (!res.ok) { alert('Error: ' + (data.error || 'Unknown')); btn.disabled = false; return; }

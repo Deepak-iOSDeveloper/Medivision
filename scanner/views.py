@@ -2,6 +2,7 @@ import os
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.core.files.storage import default_storage
 
@@ -49,7 +50,7 @@ def scan_page(request, model_key):
 
 
 # ── Run prediction (POST AJAX) ────────────────────────────────────────────────
-
+@csrf_exempt
 @require_POST
 def run_scan(request, model_key):
     if model_key not in MODEL_REGISTRY:

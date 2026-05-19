@@ -7,8 +7,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'medivision-dev-secret-change-in-prod')
 DEBUG = True
 ALLOWED_HOSTS = ['*']
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_TRUSTED_ORIGINS = ['https://*.hf.space']
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+X_FRAME_OPTIONS = 'ALLOWALL'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
 INSTALLED_APPS = [

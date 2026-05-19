@@ -66,3 +66,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Path where your trained .h5 / SavedModel files live
 MODELS_DIR = os.getenv('MODELS_DIR', str(BASE_DIR / 'ml_models'))
+X_FRAME_OPTIONS = 'ALLOWALL'

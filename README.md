@@ -4,33 +4,6 @@
 
 ## Setup
 
----
-<i style="color:red">First Run the image_analysis.ipynb file - it will train the model using our Medical Dataset Folder which contain all the image files</i>
-## IMPORTANT: Saving Your Trained Models
-
-At the end of your notebook, add these lines to save all 13 CNNs:
-
-```python
-import os
-os.makedirs('ml_models', exist_ok=True)
-
-cnn_brain_cancer_tumor.save('ml_models/brain_cancer_tumor.keras')
-cnn_brain_tumor_not.save('ml_models/brain_tumor_not.keras')
-cnn_brain_tumor_type.save('ml_models/brain_tumor_type.keras')
-cnn_breast_tumor_type.save('ml_models/breast_tumor_type.keras')
-cnn_heart_desease.save('ml_models/heart_disease.keras')
-cnn_brain_cancer_2.save('ml_models/brain_cancer_2.keras')
-cnn_breast_cancer_2.save('ml_models/breast_cancer_2.keras')
-cnn_cervical_cancer.save('ml_models/cervical_cancer.keras')
-cnn_kidney_cancer.save('ml_models/kidney_cancer.keras')
-cnn_lung_cancer.save('ml_models/lung_cancer.keras')
-cnn_lymphoma_cancer.save('ml_models/lymphoma_cancer.keras')
-cnn_oral_cancer.save('ml_models/oral_cancer.keras')
-cnn_pneumonia_tuborculosis.save('ml_models/pneumonia_tuberculosis.keras')
-```
-
-Copy the `ml_models/` folder into the root of this Django project.
-
 ```bash
 unzip medivision.zip && cd medivision
 python -m venv venv && source venv/bin/activate

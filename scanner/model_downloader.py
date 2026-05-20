@@ -39,4 +39,3 @@ def download_models():
             local_dir=settings.MODELS_DIR,
         )
         print(f"✅ Done: {filename}")
-download_models()

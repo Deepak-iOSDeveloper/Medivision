@@ -20,17 +20,24 @@ MODEL_FILES = [
     "pneumonia_tuberculosis.keras",
 ]
 
+
+
 def download_models():
     from huggingface_hub import hf_hub_download
+    import sys
 
     os.makedirs(settings.MODELS_DIR, exist_ok=True)
+    print("=== Starting model download check ===", flush=True)
+    print(f"MODELS_DIR: {settings.MODELS_DIR}", flush=True)
+    print(f"HF_REPO: {HF_REPO}", flush=True)
+    print(f"HF_TOKEN set: {bool(HF_TOKEN)}", flush=True)
 
     for filename in MODEL_FILES:
         dest = os.path.join(settings.MODELS_DIR, filename)
         if os.path.exists(dest):
-            print(f"✅ Already exists: {filename}")
+            print(f"✅ Already exists: {filename}", flush=True)
             continue
-        print(f"⬇️  Downloading: {filename}")
+        print(f"⬇️  Downloading: {filename}", flush=True)
         hf_hub_download(
             repo_id=HF_REPO,
             filename=filename,
@@ -38,4 +45,6 @@ def download_models():
             token=HF_TOKEN,
             local_dir=settings.MODELS_DIR,
         )
-        print(f"✅ Done: {filename}")
+        print(f"✅ Done: {filename}", flush=True)
+
+    print("=== Model download check complete ===", flush=True)
